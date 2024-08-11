@@ -17,6 +17,10 @@ android {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
+    buildFeatures {
+        buildConfig = true
+    }
+
     buildTypes {
         release {
             isMinifyEnabled = false
@@ -25,7 +29,20 @@ android {
                 "proguard-rules.pro"
             )
         }
+
+        // Create the new 'staging' build type
+        create("staging") {
+            // Optional: inherit properties from another build type
+            // initWith(getByName("debug"))  // Uncomment if needed
+
+            applicationIdSuffix = ".staging"
+            versionNameSuffix = "-staging"
+            isDebuggable = true
+        }
+
     }
+
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
